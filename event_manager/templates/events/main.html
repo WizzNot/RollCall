@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Добавление события{% endblock %}
+
+{% load static %}
+
+{% block head %}
+<script src="https://api-maps.yandex.ru/2.1/?apikey=db798952-c7c3-4a2b-b8c3-fb7ab5536524&lang=ru_RU"></script>
+<script src="{% static 'js/map.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div id="map" style="width: 100%; height: 400px"></div>
+    <button id="getCoordsButton">Добавить событие</button>
+
+{% endblock %}

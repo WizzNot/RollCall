@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Эти урлс здесь пока для теста особо смысла не имеют.
     # Удали сообщение если все устраивает
+    path('events/', include('events.urls')),
     path('', include('homepage.urls')),
 ] + static(
     settings.MEDIA_URL,
