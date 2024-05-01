@@ -61,11 +61,10 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          cd event_manager
-          pip install -r ../requirements/dev.txt
+          pip install -r requirements/dev.txt
 
       - name: Run migrations
-        run: python manage.py migrate
+        run: python event_manager/manage.py migrate
 
       - name: Run tests
-        run: python manage.py test
+        run: python event_manager/manage.py test
