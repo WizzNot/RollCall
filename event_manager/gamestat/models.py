@@ -14,7 +14,7 @@ class GameStat(models.Model):
     favorite_game_playtime = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"Статистика {self.user.username}"
+        return f'Статистика {self.user.username}'
 
     @classmethod
     def create_or_update(
@@ -26,11 +26,11 @@ class GameStat(models.Model):
     ):
         game_stat, created = cls.objects.get_or_create(user=user)
         game_stat.top_5_hours = [
-            {"name": game.name, "url": game.url, "playtime": game.playtime}
+            {'name': game.name, 'url': game.url, 'playtime': game.playtime}
             for game in top_5_hours
         ]
         game_stat.top_5_last_2weeks = [
-            {"name": game.name, "url": game.url, "playtime": game.playtime}
+            {'name': game.name, 'url': game.url, 'playtime': game.playtime}
             for game in top_5_last_2weeks
         ]
         game_stat.favorite_game_playtime = favorite_game.playtime
