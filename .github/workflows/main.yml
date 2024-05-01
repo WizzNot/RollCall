@@ -1,70 +1,36 @@
-name: CI
+name: CI/CD Pipeline
 
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   setup:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.12'
-
+      - uses: actions/checkout@v2
       - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          cd event_manager
-          pip install -r ../requirements/prod.txt
+        run: pip install -r ../requirements/prod.txt
+      - name: Check code style
+        run: python manage.py check
 
   linting:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.12'
-
-      - name: Install Ruff
+      - uses: actions/checkout@v2
+      - name: Install ruff
         run: pip install ruff
-          
-      - name: Run linting
+      - name: Run linter
         run: ruff check .
 
   tests:
     runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.12'
-
+      - uses: actions/checkout@v2
       - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install -r requirements/dev.txt
-
-      - name: Run migrations
-        run: python event_manager/manage.py migrate
-
+        run: pip install -r ../requirements/dev.txt
+      - name: Migrate database
+        run: python manage.py migrate
       - name: Run tests
-        run: python event_manager/manage.py test
+        run: python manage.py test
