@@ -1,4 +1,5 @@
-[![pipeline status](https://gitlab.crja72.ru/django/2024/spring/course/projects/team-8/badges/main/pipeline.svg)](https://gitlab.crja72.ru/django/2024/spring/course/projects/team-8/-/pipelines)
+[![CI](https://github.com/WizzNot/RollCall/actions/workflows/main.yml/badge.svg)](https://github.com/WizzNot/RollCall/actions/workflows/main.yml)
+
 
 # Менеджер мероприятий
 RollCall — сайт для геймеров. Планируйте катки с дузьями легко и быстро!
