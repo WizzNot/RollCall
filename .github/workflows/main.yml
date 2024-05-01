@@ -6,8 +6,12 @@ on:
       - main
 
 jobs:
-  setup:
+  tests:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
 
     steps:
       - name: Checkout code
@@ -21,8 +25,14 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          cd event_manager
-          pip install -r ../requirements/prod.txt
+          pip install -r requirements/dev.txt
+
+      - name: Run migrations
+        run: python /home/runner/work/RollCall/RollCall/event_manager/manage.py migrate
+
+      - name: Run tests
+        run: python /home/runner/work/RollCall/RollCall/event_manager/manage.py test
+
 
   linting:
     runs-on: ubuntu-latest
